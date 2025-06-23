@@ -68,17 +68,17 @@ router.post('/upload', upload.single('video'), async (req, res) => {
     try {
         await downloadFileFromDrive('token.json');
 
+        // 3️⃣ Upload to Instagram (needs public URL - provide from Drive/S3)
+        const publicUrl = await uploadFileToDriveAndGetPublicUrl(videoPath);
+        console.log(publicUrl);
+        await uploadReelToInstagram(publicUrl, finalCaption);
+
         // 1️⃣ Upload to Facebook
         await uploadReelToFacebook(videoPath, finalCaption);
 
         // 2️⃣ Upload to YouTube Shorts
         const youtubeVideoId = await uploadShortToYouTube(videoPath, youtubeTitle, finalDescription);
         console.log(`🎬 YouTube Uploaded: https://www.youtube.com/watch?v=${youtubeVideoId}`);
-
-        // 3️⃣ Upload to Instagram (needs public URL - provide from Drive/S3)
-        const publicUrl = await uploadFileToDriveAndGetPublicUrl(videoPath);
-        console.log(publicUrl);
-        await uploadReelToInstagram(publicUrl, finalCaption);
 
         if (fs.existsSync('token.json')) await uploadOrUpdateFile('token.json', 'token.json');
         res.send('🎉 Uploaded to Instagram, Facebook, YouTube successfully!');
