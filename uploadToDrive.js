@@ -5,12 +5,11 @@ const mime = require('mime-types');
 require('dotenv').config();
 
 const DRIVE_FOLDER_ID = process.env.DRIVE_ID;
-const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+const SERVICE_ACCOUNT = require('./service_account.json');
 
-// use serviceAccount like normal
 const auth = new google.auth.GoogleAuth({
-  credentials: serviceAccount,
-scopes: ['https://www.googleapis.com/auth/drive']
+  credentials: SERVICE_ACCOUNT,
+  scopes: ['https://www.googleapis.com/auth/drive'],
 });
 
 const drive = google.drive({ version: 'v3', auth });
