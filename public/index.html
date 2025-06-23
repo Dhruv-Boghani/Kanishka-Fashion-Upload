@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Clip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .upload-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="video">Select video:</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+
+        <label for="yt-title">YouTube Title (max 100 chars):</label>
+        <input type="text" id="yt-title" name="youtube_title" maxlength="100" required>
+
+        <label for="yt-desc">YouTube Description:</label>
+        <textarea id="yt-desc" name="youtube_description" rows="4" cols="30" required></textarea>
+
+        <label for="ig-caption">Instagram Caption:</label>
+        <textarea id="ig-caption" name="instagram_caption" rows="4" cols="30" required></textarea>
+
+        <button type="submit" class="upload-btn" onclick="alert('Uploading...')">Upload</button>
+    </form>
+</body>
+
+</html>
