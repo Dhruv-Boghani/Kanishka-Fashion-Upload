@@ -5,7 +5,11 @@ const mime = require('mime-types');
 require('dotenv').config();
 
 const DRIVE_FOLDER_ID = process.env.DRIVE_ID;
-const SERVICE_ACCOUNT = require('./service_account.json');
+
+const serviceAccountPath = fs.existsSync('/etc/secrets/service_account.json')
+    ? '/etc/secrets/service_account.json'
+    : path.join(__dirname, 'service_account.json');
+const SERVICE_ACCOUNT = require(serviceAccountPath);
 
 const auth = new google.auth.GoogleAuth({
   credentials: SERVICE_ACCOUNT,
