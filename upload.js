@@ -7,6 +7,7 @@ const axios = require('axios');
 const { uploadShortToYouTube } = require('./youtube_upload'); // Your existing YouTube upload function
 require('dotenv').config();
 const { uploadFileToDriveAndGetPublicUrl } = require('./uploadToDrive');
+const { google } = require('googleapis');
 
 const router = express.Router();
 
